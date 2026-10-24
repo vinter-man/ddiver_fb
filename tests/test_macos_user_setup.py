@@ -1043,6 +1043,7 @@ def test_update_waits_for_a_collector_still_closing_chrome_before_starting_it(
     assert "collector started again" in out
 
 
+@macos
 def test_an_existing_operator_door_is_kept_in_step_with_the_checkout(world: World) -> None:
     assert run_setup(world, answers=(TOKEN, OWNER_ID))[0] == 0
     door = world.home / "bin" / "fbc-operator.sh"
@@ -1057,6 +1058,7 @@ def test_an_existing_operator_door_is_kept_in_step_with_the_checkout(world: Worl
     assert "operator door" in out
 
 
+@macos
 def test_update_that_cannot_see_the_collector_stop_says_how_to_start_it(world: World) -> None:
     assert run_setup(world, answers=(TOKEN, OWNER_ID))[0] == 0
     (world.state / "loaded").write_text("")
@@ -1069,6 +1071,7 @@ def test_update_that_cannot_see_the_collector_stop_says_how_to_start_it(world: W
     assert "launchctl bootstrap gui/$(id -u)" in out
 
 
+@macos
 def test_update_stops_fast_forwards_and_starts_again(world: World) -> None:
     assert run_setup(world, answers=(TOKEN, OWNER_ID))[0] == 0
     (world.repo / "NEWS").write_text("two\n")
