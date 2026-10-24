@@ -107,15 +107,15 @@ const Caption: React.FC<{children: React.ReactNode; from: number; to: number}> =
 type Post = {name: string; group: string; text: string; hit?: string};
 
 const FEED: Post[] = [
-  {name: 'Elena', group: 'Sofia Moms', text: 'Which kindergarten in Lozenets has places this year?'},
-  {name: 'Petar', group: 'Rides Plovdiv ⇄ Sofia', text: 'Пътувам за София в 7:30, 2 места'},
-  {name: 'Georgi', group: 'Second-hand · Sofia', text: 'Bike, 120 eur, pickup only'},
-  {name: 'Anna K.', group: 'Sofia Moms', text: 'Any good pediatrician in Mladost?'},
-  {name: 'Nikolay', group: 'Free stuff Sofia', text: 'Giving away boxes after the move'},
-  {name: 'Desi', group: 'Flats for rent Sofia', text: 'Двустаен в Гео Милев, 600 евро'},
+  {name: 'Elena', group: 'Sofia Moms', text: 'Which kindergarten in the centre has places this year?'},
+  {name: 'Mark', group: 'Rides Sofia ⇄ Athens', text: 'Driving to Athens at 7:30, 2 seats'},
+  {name: 'Daniel', group: 'Second-hand · Sofia', text: 'Bike, 120 eur, pickup only'},
+  {name: 'Anna K.', group: 'Sofia Moms', text: 'Any good pediatrician near the South Park?'},
+  {name: 'Nick', group: 'Free stuff Sofia', text: 'Giving away boxes after the move'},
+  {name: 'Kate', group: 'Flats for rent Sofia', text: 'Two-room flat by the park, 600 eur'},
   {name: 'Maria P.', group: 'Second-hand · Sofia', text: 'Selling a stroller, barely used, 80 eur', hit: 'stroller'},
-  {name: 'Ivo', group: 'Free stuff Sofia', text: 'Old TV, works, come and take it'},
-  {name: 'Kalina', group: 'Sofia Moms', text: 'Lost a blue mitten near South Park 🧤'},
+  {name: 'Leo', group: 'Free stuff Sofia', text: 'Old TV, works, come and take it'},
+  {name: 'Nina', group: 'Sofia Moms', text: 'Lost a blue mitten near South Park 🧤'},
 ];
 const HIT = FEED.findIndex((p) => p.hit);
 const CARD_H = 74;
@@ -305,7 +305,7 @@ const Verdicts: React.FC = () => {
       >
         <span style={{fontFamily: MONO, fontSize: 14, color: C.grey}}>/ai add {captured.ids.rides} </span>
         <br />
-        “{captured.wish}”
+        🤖 “{captured.wish}”
       </div>
       <div style={{display: 'flex', flexDirection: 'column', gap: 8, marginTop: 14}}>
         {rows.map((v, i) => {
@@ -358,7 +358,7 @@ const Verdicts: React.FC = () => {
           opacity: interpolate(frame, [376, 388], [0, 1], clamp),
         }}
       >
-        {captured.verdicts.length} posts judged · DeepSeek V4.1 Flash · about $0.0002 a post
+        {captured.verdicts.length} posts judged by 🇨🇳🙏 DeepSeek V4.1 Flash 🙏🇨🇳 · about $0.0002 a post
       </div>
     </div>
   );
@@ -369,7 +369,7 @@ export const Workflow: React.FC = () => (
     <Caption from={0} to={102}>A browser at home reads your groups&apos; feed</Caption>
     <Caption from={102} to={168}>A rule catches one post</Caption>
     <Caption from={168} to={262}>The bot tells you</Caption>
-    <Caption from={262} to={TOTAL + 20}>Or say it in words, and a model judges</Caption>
+    <Caption from={262} to={TOTAL + 20}>🤖 Or say it in words, and a model judges</Caption>
     <Feed />
     <Phone />
     <Verdicts />

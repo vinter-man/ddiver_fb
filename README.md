@@ -1,6 +1,6 @@
 [![CI](https://github.com/vinter-man/ddiver_fb/actions/workflows/ci.yml/badge.svg)](https://github.com/vinter-man/ddiver_fb/actions/workflows/ci.yml)
 ![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue)
-![Reads as a member](https://img.shields.io/badge/facebook-reads%20as%20a%20member-orange)
+![Chrome at home](https://img.shields.io/badge/collector-Chrome%20at%20home-orange)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 ![main picture](docs/assets/banner.png)
@@ -21,10 +21,6 @@ Facebook without ever writing to it, and stops at the first warning.
 
 ![demo](docs/assets/workflow.gif)
 
-> :warning: Reading Facebook automatically while logged in breaks Meta's Terms (§3.2), however
-> slowly it is done. The realistic worst case is the account being restricted, so use an
-> account you can afford to lose, not your main one.
-
 ---
 
 ## Table of contents
@@ -33,7 +29,7 @@ Facebook without ever writing to it, and stops at the first warning.
   * [Pick the groups](#groups)
   * [Write the rules](#rules)
   * [Get the one post that matters](#notification)
-  * [Say it in words](#ai)
+  * [:robot: Say it in words](#ai)
   * [When something is wrong](#alerts)
 * [Installation](#installation)
   * [The brain, on a VPS](#brain)
@@ -95,13 +91,13 @@ never hear from this author again, or drop the rule.
 > (`⏳ Posted 30 h ago, appeared in the group only now`). Subscribing never backfills old posts.
 > `ingest.py`, `source.py`, `fbcollector/uplink.py`.
 
-### <a name="ai"></a> Say it in words
+### <a name="ai"></a> :robot: Say it in words
 
 Keywords are bad at "people who need a ride, not drivers who offer one": both posts say
-*Plovdiv*, *Sofia* and *seat*. So the owner can give a group a wish in their own words
+*Sofia*, *Athens* and *seat*. So the owner can give a group a wish in their own words
 
 ```
-/ai add 207845119336801 people who need a ride from Plovdiv to Sofia, not drivers offering seats
+/ai add 207845119336801 people who need a ride from Sofia to Athens, not drivers offering seats
 ```
 
 and every new post of that group goes to a model that answers how likely it fits, in percent,
@@ -113,9 +109,9 @@ It runs in shadow for now: verdicts are recorded, nothing is sent yet, so a wish
 for a few days before it is trusted.
 
 > :suspect: The model was picked by a bake-off: seven models through OpenRouter on 206 real
-> posts from the groups, labelled by hand. DeepSeek V4.1 Flash found every rideshare request
-> with no false one, took none of 135 unrelated classifieds, and costs about $0.24 per
-> thousand posts. Answers are JSON under a strict schema at temperature 0; an empty one is
+> posts from the groups, labelled by hand. :cn: :pray: DeepSeek V4.1 Flash :pray: :cn: found
+> every rideshare request with no false one, took none of 135 unrelated classifieds, and costs
+> about $0.24 per thousand posts. Answers are JSON under a strict schema at temperature 0; an empty one is
 > asked again once.
 >
 > The queue is written in the same step that stores the post, so a post is either judged or
@@ -157,7 +153,7 @@ late a new post may be
 You need four things:
 
 * a computer at home that stays on, macOS or Linux, with Google Chrome
-* a Facebook account that is a member of the groups (see the warning above)
+* a Facebook account that is a member of the groups
 * a small VPS with Docker for the brain and the bot
 * a bot token from [@BotFather](https://t.me/BotFather), an `api_id` and `api_hash` from
   [my.telegram.org](https://my.telegram.org), and your own Telegram user id

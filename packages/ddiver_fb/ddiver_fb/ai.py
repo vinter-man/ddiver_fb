@@ -1,7 +1,7 @@
 """The AI rule on the brain: wishes, the posts waiting for the model, and what it said.
 
-A user writes a wish for a group in plain words ("a two-room flat to rent in Lozenets, up to
-700 euro, straight from the owner"); every new post of that group is judged by a cheap model
+A user writes a wish for a group in plain words ("a two-room flat to rent in the city centre,
+up to 700 euro, straight from the owner"); every new post of that group is judged by a cheap model
 (:mod:`ddiver_fb.judge`), which answers how likely the post fits, in percent, and why.
 
 - **The queue is durable.** :meth:`AiStore.enqueue` runs inside the ingest of the post, before

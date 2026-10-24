@@ -1,6 +1,6 @@
 {
   "notification": {
-    "html": "👥 Group <a href=\"#\">Second-hand · Sofia</a>\n🔒 Private group — the link opens for members only\n👤 Author <a href=\"#\">Maria Petrova</a> · <code>100012345678901</code>\n🔗 Post <a href=\"#\">https://www.facebook.com/groups/480112093517204/posts/1042877310662905/</a>\n🕒 2026-10-24 10:59:53 +03:00 (Europe/Sofia) · 3 min ago\n🔑 Rule <code>stroller</code> (group rule)\n\nSelling a <b>stroller</b>, barely used, 80 eur. Pickup in Mladost 4, can send more photos 🙂",
+    "html": "👥 Group <a href=\"#\">Second-hand · Sofia</a>\n🔒 Private group — the link opens for members only\n👤 Author <a href=\"#\">Maria Parker</a> · <code>100012345678901</code>\n🔗 Post <a href=\"#\">https://www.facebook.com/groups/480112093517204/posts/1042877310662905/</a>\n🕒 2026-10-24 10:59:53 +03:00 (Europe/Sofia) · 3 min ago\n🔑 Rule <code>stroller</code> (group rule)\n\nSelling a <b>stroller</b>, barely used, 80 eur. Pickup near South Park, can send photos 🙂",
     "buttons": [
       [
         "🚫 Ignore author",
@@ -10,7 +10,7 @@
     "time": "11:03"
   },
   "earlier": {
-    "html": "👥 Group <a href=\"#\">Free stuff Sofia</a>\n👤 Author <a href=\"#\">Ivo Dimitrov</a> · <code>61550872014336</code>\n🔗 Post <a href=\"#\">https://www.facebook.com/groups/361048227915530/posts/8830164502771/</a>\n🕒 2026-10-23 19:14:05 +03:00 (Europe/Sofia) · 5 min ago\n🔑 Rule <code>stroller</code> (group rule)\n\nGiving away a <b>stroller</b> rain cover and two baby bottles, pickup Lyulin 7 tonight",
+    "html": "👥 Group <a href=\"#\">Free stuff Sofia</a>\n👤 Author <a href=\"#\">Leo Dawson</a> · <code>61550872014336</code>\n🔗 Post <a href=\"#\">https://www.facebook.com/groups/361048227915530/posts/8830164502771/</a>\n🕒 2026-10-23 19:14:05 +03:00 (Europe/Sofia) · 5 min ago\n🔑 Rule <code>stroller</code> (group rule)\n\nGiving away a <b>stroller</b> rain cover and two baby bottles, pickup in the centre tonight",
     "buttons": [
       [
         "🚫 Ignore author",
@@ -29,7 +29,7 @@
         "✅ Free stuff Sofia"
       ],
       [
-        "✅ Rides Plovdiv ⇄ Sofia"
+        "✅ Rides Sofia ⇄ Athens"
       ],
       [
         "✅ Second-hand · Sofia"
@@ -50,8 +50,8 @@
     ]
   },
   "test": {
-    "command": "/test Selling a stroller and a baby crib, barely used, Mladost",
-    "html": "— Flats for rent Sofia, no agencies — no match\n✅ Free stuff Sofia — stroller (stroller)\n— Rides Plovdiv ⇄ Sofia — no match\n✅ Second-hand · Sofia — stroller (stroller)\n— Sofia Moms — no match"
+    "command": "/test Selling a stroller and a baby crib, barely used, near South Park",
+    "html": "— Flats for rent Sofia, no agencies — no match\n✅ Free stuff Sofia — stroller (stroller)\n— Rides Sofia ⇄ Athens — no match\n✅ Second-hand · Sofia — stroller (stroller)\n— Sofia Moms — no match"
   },
   "status": {
     "command": "/status",
@@ -59,7 +59,7 @@
   },
   "ai": {
     "command": "/ai",
-    "html": "🤖 AI rule · model deepseek/deepseek-v4.1-flash · shadow: verdicts are recorded, nothing is sent yet\n\n#1 Rides Plovdiv ⇄ Sofia: «people who need a ride from Plovdiv to Sofia, not drivers offering seats» — sends from 70%\n   24 h: 4 judged, 2 would be sent, 0 failed, 0 waiting · $0.001\n#2 Flats for rent Sofia, no agencies: «a two-room flat to rent in Lozenets or Ivan Vazov, up to 700 euro, straight from the owner» — sends from 70%\n   24 h: 3 judged, 1 would be sent, 0 failed, 0 waiting · $0.001\n\nModel calls in 24 h: 7 of 1000\n\nWould have been sent (7 days):\n• 100% #1 Passenger seeks ride from Plovdiv to Sofia, exactly matching wish.\n  https://www.facebook.com/groups/207845119336801/posts/3118204779501/\n• 100% #2 Two-room flat in Lozenets, 650 euro, directly from owner, no commission.\n  https://www.facebook.com/groups/1510377402268945/posts/2204617330918/\n• 100% #1 Post is a passenger seeking ride from Plovdiv to Sofia, paying fuel.\n  https://www.facebook.com/groups/207845119336801/posts/3117950337160/\n\n/ai add &lt;group id&gt; &lt;wish in your words&gt; · /ai del &lt;n&gt; · group ids: /listings"
+    "html": "🤖 AI rule · model deepseek/deepseek-v4.1-flash · shadow: verdicts are recorded, nothing is sent yet\n\n#1 Rides Sofia ⇄ Athens: «people who need a ride from Sofia to Athens, not drivers offering seats» — sends from 70%\n   24 h: 4 judged, 2 would be sent, 0 failed, 0 waiting · $0.001\n#2 Flats for rent Sofia, no agencies: «a two-room flat to rent in the city centre, up to 700 euro, straight from the owner» — sends from 70%\n   24 h: 3 judged, 1 would be sent, 0 failed, 0 waiting · $0.001\n\nModel calls in 24 h: 7 of 1000\n\nWould have been sent (7 days):\n• 100% #1 Post is from a person seeking a ride from Sofia to Athens.\n  https://www.facebook.com/groups/207845119336801/posts/3118204779501/\n• 100% #2 Two-room flat in centre, 650 euro, from owner, matches all conditions\n  https://www.facebook.com/groups/1510377402268945/posts/2204617330918/\n• 100% #1 Poster needs a ride from Sofia to Athens, not offering seats.\n  https://www.facebook.com/groups/207845119336801/posts/3117950337160/\n\n/ai add &lt;group id&gt; &lt;wish in your words&gt; · /ai del &lt;n&gt; · group ids: /listings"
   },
   "alerts": [
     {
@@ -93,37 +93,37 @@
       "html": "🔕 No new posts from Sofia Moms for 3 h, nights not counted (it usually posts at least every 1 h). The collector says it is reading — check the group by hand."
     }
   ],
-  "wish": "people who need a ride from Plovdiv to Sofia, not drivers offering seats",
+  "wish": "people who need a ride from Sofia to Athens, not drivers offering seats",
   "ids": {
     "rides": "207845119336801"
   },
   "verdicts": [
     {
-      "text": "Търся място за утре сутрин от Пловдив за София, 1 човек, малък багаж",
+      "text": "Looking for a seat from Sofia to Athens tomorrow morning, 1 person, small bag",
       "percent": 100,
-      "reason": "Passenger seeks ride from Plovdiv to Sofia, exactly matching wish."
+      "reason": "Post is from a person seeking a ride from Sofia to Athens."
     },
     {
-      "text": "Пътувам Пловдив - София днес 18:00, 3 свободни места, 15лв",
+      "text": "Driving Sofia → Athens today at 18:00, 3 free seats, 30 eur",
       "percent": 0,
-      "reason": "Driver offers seats from Plovdiv to Sofia, not someone needing a ride."
+      "reason": "Driver offers seats Sofia to Athens; user wants passengers seeking rides, not drivers."
     },
     {
-      "text": "Има ли някой за София от Пловдив сега? Плащам гориво",
+      "text": "Anyone going to Athens from Sofia right now? I'll pay for fuel",
       "percent": 100,
-      "reason": "Post is a passenger seeking ride from Plovdiv to Sofia, paying fuel."
+      "reason": "Poster needs a ride from Sofia to Athens, not offering seats."
     },
     {
-      "text": "Търся място София - Пловдив в петък вечерта",
+      "text": "Need a ride Athens → Sofia on Friday evening",
       "percent": 0,
-      "reason": "Post seeks Sofia to Plovdiv, opposite direction from desired Plovdiv to Sofia."
+      "reason": "Wrong direction: Athens to Sofia, not Sofia to Athens."
     }
   ],
   "names": {
     "480112093517204": "Second-hand · Sofia",
     "1293550871064118": "Sofia Moms",
     "361048227915530": "Free stuff Sofia",
-    "207845119336801": "Rides Plovdiv ⇄ Sofia",
+    "207845119336801": "Rides Sofia ⇄ Athens",
     "1510377402268945": "Flats for rent Sofia, no agencies",
     "905662184027713": "Bikes & scooters BG"
   }

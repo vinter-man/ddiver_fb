@@ -71,20 +71,17 @@ NAMES = {
     SECOND_HAND: "Second-hand · Sofia",
     MOMS: "Sofia Moms",
     FREE: "Free stuff Sofia",
-    RIDES: "Rides Plovdiv ⇄ Sofia",
+    RIDES: "Rides Sofia ⇄ Athens",
     FLATS: "Flats for rent Sofia, no agencies",
     BIKES: "Bikes & scooters BG",
 }
 WATCHED = (SECOND_HAND, MOMS, FREE, RIDES, FLATS)
 
 WISHES = (
-    (RIDES, "people who need a ride from Plovdiv to Sofia, not drivers offering seats"),
+    (RIDES, "people who need a ride from Sofia to Athens, not drivers offering seats"),
     (
         FLATS,
-        (
-            "a two-room flat to rent in Lozenets or Ivan Vazov, up to 700 euro, "
-            "straight from the owner"
-        ),
+        "a two-room flat to rent in the city centre, up to 700 euro, straight from the owner",
     ),
 )
 # (wish index, post id, minutes ago, text, percent, reason): the model's own answers.
@@ -93,57 +90,57 @@ VERDICTS = (
         0,
         3_118_204_779_501,
         14,
-        "Търся място за утре сутрин от Пловдив за София, 1 човек, малък багаж",
+        "Looking for a seat from Sofia to Athens tomorrow morning, 1 person, small bag",
         100,
-        "Passenger seeks ride from Plovdiv to Sofia, exactly matching wish.",
+        "Post is from a person seeking a ride from Sofia to Athens.",
     ),
     (
         0,
         3_118_191_002_845,
         52,
-        "Пътувам Пловдив - София днес 18:00, 3 свободни места, 15лв",
+        "Driving Sofia → Athens today at 18:00, 3 free seats, 30 eur",
         0,
-        "Driver offers seats from Plovdiv to Sofia, not someone needing a ride.",
+        "Driver offers seats Sofia to Athens; user wants passengers seeking rides, not drivers.",
     ),
     (
         0,
         3_117_950_337_160,
         190,
-        "Има ли някой за София от Пловдив сега? Плащам гориво",
+        "Anyone going to Athens from Sofia right now? I'll pay for fuel",
         100,
-        "Post is a passenger seeking ride from Plovdiv to Sofia, paying fuel.",
+        "Poster needs a ride from Sofia to Athens, not offering seats.",
     ),
     (
         0,
         3_117_802_514_473,
         260,
-        "Търся място София - Пловдив в петък вечерта",
+        "Need a ride Athens → Sofia on Friday evening",
         0,
-        "Post seeks Sofia to Plovdiv, opposite direction from desired Plovdiv to Sofia.",
+        "Wrong direction: Athens to Sofia, not Sofia to Athens.",
     ),
     (
         1,
         2_204_617_330_918,
         35,
-        "Давам под наем двустаен в Лозенец, 650 евро, от собственик, без комисионна",
+        "Renting out a two-room flat in the centre, 650 eur, from the owner, no commission",
         100,
-        "Two-room flat in Lozenets, 650 euro, directly from owner, no commission.",
+        "Two-room flat in centre, 650 euro, from owner, matches all conditions",
     ),
     (
         1,
         2_204_598_116_022,
         80,
-        "Агенция Дом+ предлага двустайни апартаменти в Лозенец, 680 евро",
+        "City Homes agency offers two-room flats in the centre, 680 eur",
         0,
-        "Agency offer, not straight from owner, so it does not fit.",
+        "Agency offer, not straight from owner, so does not fit.",
     ),
     (
         1,
         2_204_411_920_457,
         300,
-        "Тристаен в Лозенец, 1100 евро",
+        "Three-room flat near the centre, 1100 eur",
         0,
-        "Three-room flat in Lozenets for 1100 euro, not two-room or under 700.",
+        "Three-room, near centre, 1100 euro, exceeds budget and wrong size",
     ),
 )
 MODEL = "deepseek/deepseek-v4.1-flash"
@@ -255,8 +252,8 @@ def notifications() -> dict[str, dict[str, Any]]:
         "notification": notification(
             SECOND_HAND,
             1_042_877_310_662_905,
-            (100_012_345_678_901, "Maria Petrova"),
-            "Selling a stroller, barely used, 80 eur. Pickup in Mladost 4, can send more photos 🙂",
+            (100_012_345_678_901, "Maria Parker"),
+            "Selling a stroller, barely used, 80 eur. Pickup near South Park, can send photos 🙂",
             "stroller",
             posted=NOW - dt.timedelta(minutes=3, seconds=12),
             seen=NOW,
@@ -265,8 +262,8 @@ def notifications() -> dict[str, dict[str, Any]]:
         "earlier": notification(
             FREE,
             8_830_164_502_771,
-            (61_550_872_014_336, "Ivo Dimitrov"),
-            "Giving away a stroller rain cover and two baby bottles, pickup Lyulin 7 tonight",
+            (61_550_872_014_336, "Leo Dawson"),
+            "Giving away a stroller rain cover and two baby bottles, pickup in the centre tonight",
             "stroller",
             posted=NOW - dt.timedelta(hours=15, minutes=49),
             seen=NOW - dt.timedelta(hours=15, minutes=44),
@@ -403,7 +400,9 @@ async def capture(tmp: Path) -> dict[str, Any]:
 
         clock.tick(75)  # the owner looks a little after the collector's last report
         groups_screen = await say(router, data="chats:0")
-        test = await say(router, "/test Selling a stroller and a baby crib, barely used, Mladost")
+        test = await say(
+            router, "/test Selling a stroller and a baby crib, barely used, near South Park"
+        )
         status_reply = await say(router, "/status")
 
         await seed_verdicts(ai, fb)
@@ -417,7 +416,7 @@ async def capture(tmp: Path) -> dict[str, Any]:
         **notifications(),
         "groups": {"html": text_of(groups_screen), "buttons": buttons(groups_screen.buttons)},
         "test": {
-            "command": "/test Selling a stroller and a baby crib, barely used, Mladost",
+            "command": "/test Selling a stroller and a baby crib, barely used, near South Park",
             "html": text_of(test),
         },
         "status": {"command": "/status", "html": text_of(status_reply)},
