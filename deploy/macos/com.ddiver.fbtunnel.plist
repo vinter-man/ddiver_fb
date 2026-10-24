@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  The collector's tunnel to the brain as a per-user LaunchAgent (DESIGN D6 and Operations): one
+  ssh local forward, from the Unix socket ~/.ssh/fbtunnel.sock to the VPS's 127.0.0.1:8781, with
+  /usr/bin/ssh alone (no autossh: launchd restarts it).
+
+  Install: deploy/macos/setup-fbc-user.sh, inside the collector's own macOS user, replaces
+  __HOME__ with that user's home, copies it to ~/Library/LaunchAgents/ and loads it, once the
+  VPS's host key is pinned (docs/RUNBOOK.md, section 9). The -F path is absolute: launchd does
+  not expand ~. With -F, ssh reads neither ~/.ssh/config nor /etc/ssh/ssh_config.
+
+  - Aqua only: it loads with the collector user's login, like the collector.
+  - KeepAlive with a 200 s throttle. launchd waits only after a run shorter than that, so a
+    long session the network dropped is restarted at once, while a key or host key the VPS
+    refuses is retried at most 3 times in 10 minutes: under fail2ban's default sshd jail
+    (maxretry 5 within findtime 10 min), so a broken key cannot get the home IP banned.
+  - Logs to ~/Library/Logs/fbtunnel.log, which the setup script trims beyond 1 MiB.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.ddiver.fbtunnel</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/ssh</string>
+    <string>-N</string>
+    <string>-F</string>
+    <string>__HOME__/.ssh/fbtunnel_client.config</string>
+    <string>fbtunnel</string>
+  </array>
+  <key>LimitLoadToSessionType</key>
+  <string>Aqua</string>
+  <key>ProcessType</key>
+  <string>Standard</string>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>200</integer>
+  <key>Umask</key>
+  <integer>63</integer>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/usr/bin:/bin</string>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>__HOME__/Library/Logs/fbtunnel.log</string>
+  <key>StandardErrorPath</key>
+  <string>__HOME__/Library/Logs/fbtunnel.log</string>
+</dict>
+</plist>

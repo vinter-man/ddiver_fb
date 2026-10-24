@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    # Only the public copy runs it; the private working repository is checked by hand.
+    if: github.repository == 'vinter-man/ddiver_fb'
+    runs-on: ubuntu-latest
+    env:
+      # The runner has a Google Chrome, but the browser tests are for a machine that will run
+      # the collector; here they would test the runner's Chrome.
+      FBC_SKIP_BROWSER: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - run: uv sync --frozen
+      - name: Lint
+        run: uv run ruff check .
+      - name: Format
+        run: uv run ruff format --check .
+      - name: Types
+        run: uv run mypy
+      - name: Tests
+        run: uv run pytest -q

@@ -1,0 +1,137 @@
+# Workspace root. The packages live in packages/*; the root only carries the shared tooling.
+[project]
+name = "ddiver-facebook"
+version = "0.1.0"
+description = "Facebook-group keyword monitor on ddiver's core: a home collector reads, a bot notifies."
+requires-python = ">=3.12"
+license = "MIT"
+authors = [{ name = "vinter-man" }]
+dependencies = ["fbwire", "fbcollector", "ddiver-fb"]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+fbwire = { workspace = true }
+fbcollector = { workspace = true }
+ddiver-fb = { workspace = true }
+# ddiver-core lives in the ddiver repo (packages/ddiver-core), public since 2026-10-24, pinned to a
+# release tag (DESIGN.md "Consuming a private repo", from when it was not). Its offline fakes are a package of their own in the
+# same tag, a dev dependency only: they never reach the brain's image. Both move together; a
+# new core is a new tag here and `uv lock`. The brain's image fetches the tag over ssh (see the
+# Dockerfile), everything else over plain https.
+ddiver-core = { git = "https://github.com/vinter-man/ddiver", tag = "core-v0.1.0", subdirectory = "packages/ddiver-core" }
+ddiver-core-testing = { git = "https://github.com/vinter-man/ddiver", tag = "core-v0.1.0", subdirectory = "packages/ddiver-core-testing" }
+
+[dependency-groups]
+dev = [
+  "ddiver-core-testing",  # the core's fakes (FakeClock, FakeBotClient); never in the image
+  "pytest>=8.3",
+  "pytest-asyncio>=0.25",
+  "pytest-cov>=6.0",
+  "pytest-timeout>=2.4.0",
+  "hypothesis>=6.120",
+  "ruff>=0.9",
+  "mypy>=1.14",
+  "pyyaml>=6.0",  # the brain's compose file is checked in tests/test_brain_packaging.py
+  "types-pyyaml",
+  "jeepney>=0.8",  # the collector's Linux sleep hook is tested against it on every platform
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["packages/fbwire", "packages/fbcollector", "packages/ddiver_fb", "tests"]
+
+[tool.ruff.lint]
+select = [
+  "E", "W", "F", "I", "N", "UP", "B", "A", "C4", "SIM", "RET", "ARG", "PTH", "ERA",
+  "PL", "RUF", "ASYNC", "S", "T20", "TRY", "PERF", "FURB", "LOG", "G", "DTZ", "ISC",
+  "PIE", "Q", "RSE", "SLF", "TID", "TCH", "FBT", "BLE", "EM", "ICN", "INP",
+]
+ignore = [
+  "PLR2004",  # magic values in comparisons are fine in small modules
+  "PLR0911",  # early returns read better than nested branches in resolvers
+  "PLR0913",  # many-argument functions are natural for wiring code
+  "TRY003", "EM101", "EM102",  # exception messages inline
+  "FBT001", "FBT002", "FBT003",  # boolean positional args in small internal APIs
+  "TC001", "TC002", "TC003",  # TYPE_CHECKING blocks add noise for little gain here
+  "ISC001",  # conflicts with the formatter
+  "S311",  # random used for jitter, not crypto
+  "ASYNC109",  # explicit timeout parameters are part of our API (implemented with wait_for)
+  "RUF001", "RUF002", "RUF003",  # Cyrillic text is the domain of this project
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = [
+  "S101", "PLR2004", "ARG", "SLF001", "INP001", "PLR0915", "FBT003",
+  "DTZ001", "S105", "S106", "PLC0415",
+]
+"scripts/**" = ["T201", "INP001", "BLE001", "PLR0915", "PLR0912"]
+# The brain's CLI imports Telethon lazily so `ddiver-fb health` stays cheap, prints its answers,
+# and reports configuration problems instead of raising.
+"packages/ddiver_fb/ddiver_fb/__main__.py" = ["PLC0415", "BLE001", "T201", "TRY300", "TRY400"]
+# Catalog strings are prose; wrapping them mid-sentence would only make them harder to review.
+"packages/ddiver_fb/ddiver_fb/strings.py" = ["E501"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["fbwire", "fbcollector", "ddiver_fb", "ddiver_core", "ddiver_core_testing"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unreachable = true
+warn_return_any = true
+disallow_any_generics = true
+no_implicit_reexport = true
+show_error_codes = true
+pretty = true
+files = [
+  "packages/fbwire/fbwire", "packages/fbcollector/fbcollector", "packages/ddiver_fb/ddiver_fb",
+  "scripts/scan_secrets.py", "tests",
+]
+
+# Telethon ships no type information; ddiver-core carries the same override.
+[[tool.mypy.overrides]]
+module = ["telethon", "telethon.*", "cryptg", "cryptg.*"]
+ignore_missing_imports = true
+
+# jeepney (the collector's Linux sleep hook) ships no type information.
+[[tool.mypy.overrides]]
+module = ["jeepney", "jeepney.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+disallow_untyped_calls = false
+disallow_incomplete_defs = false
+check_untyped_defs = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+addopts = "-q --strict-markers --timeout=60"
+markers = [
+  "e2e: needs the live Facebook account and the owner present (skipped by default)",
+  "browser: launches a real local Chrome against a local test page (no Facebook)",
+  "headed: a browser check of the headed fingerprint; runs only with FBC_BROWSER_HEADED=1",
+]
+filterwarnings = ["error::RuntimeWarning"]
+
+[tool.coverage.run]
+source = ["fbwire", "fbcollector", "ddiver_fb"]
+branch = true
+# The CLI is wiring around the tested pieces (like ddiver's); its parser and health check are
+# still exercised by tests/brain/test_cli.py.
+omit = ["*/ddiver_fb/__main__.py"]
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+skip_covered = true
+exclude_also = ["if TYPE_CHECKING:", "raise NotImplementedError", "@overload"]

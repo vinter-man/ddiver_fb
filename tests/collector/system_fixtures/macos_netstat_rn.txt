@@ -1,0 +1,90 @@
+Routing tables
+
+Internet:
+Destination        Gateway            Flags               Netif Expire
+default            192.0.2.1        UGScg                 en0
+default            link#31            UCSIg              utun13
+198.51.100.2/32    link#31            UCS                utun13
+198.51.100.3/32    link#31            UCS                utun13
+198.51.100.4/32      link#31            UCS                utun13
+198.51.100.5/32     link#31            UCS                utun13
+192.0.2.61/32       link#31            UCS                utun13
+100.64/10          link#31            UCS                utun13
+127                127.0.0.1          UCS                   lo0
+127.0.0.1          127.0.0.1          UH                    lo0
+169.254            link#14            UCS                   en0      !
+169.254.169.254    link#14            UHRLSW                en0      !
+192.0.2            link#14            UCS                   en0      !
+192.0.2.1/32     link#14            UCS                   en0      !
+192.0.2.1        02:00:5e:10:00:02  UHLWIir               en0   1188
+192.0.2.224/32     link#14            UCS                   en0      !
+192.0.2.224        02:00:5e:10:00:03   UHLWI                 lo0
+192.0.2.225        link#14            UHLWIi                en0      !
+192.0.2.226        02:00:5e:10:00:04   UHLWIi                en0   1073
+192.0.2.227        02:00:5e:10:00:05  UHLWI                 en0      !
+224.0.0/4          link#14            UmCS                  en0      !
+224.0.0/4          link#31            UmCSI              utun13
+224.0.0.251        02:00:5e:10:00:06      UHmLWI                en0
+239.255.255.250    02:00:5e:10:00:07    UHmLWI                en0
+255.255.255.255/32 link#14            UCS                   en0      !
+255.255.255.255/32 link#31            UCSI               utun13
+
+Internet6:
+Destination                             Gateway                                 Flags               Netif Expire
+default                                 fe80::%utun0                            UGcIg               utun0
+default                                 fe80::%utun1                            UGcIg               utun1
+default                                 fe80::%utun2                            UGcIg               utun2
+default                                 fe80::%utun3                            UGcIg               utun3
+default                                 fe80::%utun4                            UGcIg               utun4
+default                                 fe80::%utun5                            UGcIg               utun5
+default                                 fe80::%utun6                            UGcIg               utun6
+default                                 fe80::%utun7                            UGcIg               utun7
+default                                 fe80::%utun8                            UGcIg               utun8
+default                                 fe80::%utun9                            UGcIg               utun9
+default                                 fe80::%utun10                           UGcIg              utun10
+default                                 fe80::%utun11                           UGcIg              utun11
+default                                 fd7a:115c:a1e0::                        UGcIg              utun13
+::1                                     ::1                                     UHL                   lo0
+fd7a:115c:a1e0::/48                     fe80::1%utun13        Uc                 utun13
+fd7a:115c:a1e0::a/128                  link#31                                 UCS                utun13
+fd7a:115c:a1e0::a                      link#31                                 UHWIi              utun13
+fd7a:115c:a1e0::a               link#31                                 UHL                   lo0
+fe80::%lo0/64                           fe80::2%lo0                             UcI                   lo0
+fe80::2%lo0                             link#1                                  UHLI                  lo0
+fe80::%en0/64                           link#14                                 UCI                   en0
+fe80::3%en0              02:00:5e:10:00:03                        UHLI                  lo0
+fe80::4%en0           02:00:5e:10:00:04                        UHLWIi                en0
+fe80::5%awdl0         02:00:5e:10:00:08                       UHLI                  lo0
+fe80::%utun0/64                         fe80::6%utun0         UcI                 utun0
+fe80::6%utun0         link#17                                 UHLI                  lo0
+fe80::5%llw0          02:00:5e:10:00:08                       UHLI                  lo0
+fe80::%utun1/64                         fe80::7%utun1          UcI                 utun1
+fe80::7%utun1          link#19                                 UHLI                  lo0
+fe80::%utun2/64                         fe80::8%utun2         UcI                 utun2
+fe80::8%utun2         link#20                                 UHLI                  lo0
+fe80::%utun3/64                         fe80::9%utun3           UcI                 utun3
+fe80::9%utun3           link#21                                 UHLI                  lo0
+fe80::%utun4/64                         fe80::a%utun4         UcI                 utun4
+fe80::a%utun4         link#22                                 UHLI                  lo0
+fe80::%utun5/64                         fe80::b%utun5          UcI                 utun5
+fe80::b%utun5          link#23                                 UHLI                  lo0
+fe80::%utun6/64                         fe80::c%utun6         UcI                 utun6
+fe80::c%utun6         link#24                                 UHLI                  lo0
+fe80::%utun7/64                         fe80::9%utun7           UcI                 utun7
+fe80::9%utun7           link#25                                 UHLI                  lo0
+fe80::%utun8/64                         fe80::d%utun8         UcI                 utun8
+fe80::d%utun8         link#26                                 UHLI                  lo0
+fe80::%utun9/64                         fe80::e%utun9         UcI                 utun9
+fe80::e%utun9         link#27                                 UHLI                  lo0
+fe80::%utun10/64                        fe80::f%utun10         UcI                utun10
+fe80::f%utun10         link#28                                 UHLI                  lo0
+fe80::%utun11/64                        fe80::10%utun11         UcI                utun11
+fe80::10%utun11         link#29                                 UHLI                  lo0
+fe80::%utun13/64                        fe80::1%utun13        UcI                utun13
+fe80::1%utun13        link#31                                 UHLI                  lo0
+ff00::/8                                ::1                                     UmCI                  lo0
+ff00::/8                                link#14                                 UmCI                  en0
+ff00::/8                                link#16                                 UmCI                awdl0
+ff00::/8                                fe80::6%utun0         UmCI                utun0
+ff00::/8                                link#18                                 UmCI                 llw0
+ff00::/8                                fe80::7%utun1          UmCI                utun1

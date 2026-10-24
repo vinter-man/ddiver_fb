@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  fbcollector as a per-user LaunchAgent (DESIGN, Operations: collector host).
+
+  Install: deploy/macos/setup-fbc-user.sh, inside the collector's own macOS user, replaces
+  __REPO__ with the checkout's absolute path and __HOME__ with that user's home and copies it
+  to ~/Library/LaunchAgents/ (docs/RUNBOOK.md, section 12); started with
+    launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.ddiver.fbcollector.plist
+
+  - Aqua only: Chrome needs the logged-in graphical session; never a background daemon. The
+    collector user's session is one, also while another user has the screen (fast user
+    switching), so its Chrome never shows on the owner's desktop.
+  - Interactive: the scheduler's timers must not be throttled like a background job's.
+  - caffeinate -i -s: no idle sleep, and no system sleep while on AC. The collector also
+    closes Chrome on any sleep it detects, and `on AC power` is one of its gates.
+  - KeepAlive with a 60 s throttle; the collector's crash-loop gate stops Facebook traffic
+    after more than 3 starts an hour, so a crash loop cannot become a navigation loop.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.ddiver.fbcollector</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/caffeinate</string>
+    <string>-i</string>
+    <string>-s</string>
+    <string>__REPO__/.venv/bin/fbcollector</string>
+    <string>run</string>
+  </array>
+  <key>LimitLoadToSessionType</key>
+  <string>Aqua</string>
+  <key>ProcessType</key>
+  <string>Interactive</string>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>60</integer>
+  <key>ExitTimeOut</key>
+  <integer>90</integer>
+  <key>Umask</key>
+  <integer>63</integer>
+  <key>WorkingDirectory</key>
+  <string>__REPO__</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/usr/bin:/bin:/usr/sbin:/sbin</string>
+    <key>PYTHONUNBUFFERED</key>
+    <string>1</string>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>__HOME__/Library/Logs/fbcollector.log</string>
+  <key>StandardErrorPath</key>
+  <string>__HOME__/Library/Logs/fbcollector.log</string>
+</dict>
+</plist>

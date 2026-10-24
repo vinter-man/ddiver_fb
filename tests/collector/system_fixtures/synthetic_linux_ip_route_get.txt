@@ -1,0 +1,2 @@
+1.1.1.1 via 192.0.2.1 dev wlp2s0 src 192.0.2.23 uid 1000 
+    cache 

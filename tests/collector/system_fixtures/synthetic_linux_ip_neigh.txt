@@ -1,0 +1,1 @@
+192.0.2.1 dev wlp2s0 lladdr 02:00:5e:10:00:01 REACHABLE

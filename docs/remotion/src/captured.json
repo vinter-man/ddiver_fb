@@ -1,0 +1,130 @@
+{
+  "notification": {
+    "html": "👥 Group <a href=\"#\">Second-hand · Sofia</a>\n🔒 Private group — the link opens for members only\n👤 Author <a href=\"#\">Maria Petrova</a> · <code>100012345678901</code>\n🔗 Post <a href=\"#\">https://www.facebook.com/groups/480112093517204/posts/1042877310662905/</a>\n🕒 2026-10-24 10:59:53 +03:00 (Europe/Sofia) · 3 min ago\n🔑 Rule <code>stroller</code> (group rule)\n\nSelling a <b>stroller</b>, barely used, 80 eur. Pickup in Mladost 4, can send more photos 🙂",
+    "buttons": [
+      [
+        "🚫 Ignore author",
+        "🗑 Remove this rule"
+      ]
+    ],
+    "time": "11:03"
+  },
+  "earlier": {
+    "html": "👥 Group <a href=\"#\">Free stuff Sofia</a>\n👤 Author <a href=\"#\">Ivo Dimitrov</a> · <code>61550872014336</code>\n🔗 Post <a href=\"#\">https://www.facebook.com/groups/361048227915530/posts/8830164502771/</a>\n🕒 2026-10-23 19:14:05 +03:00 (Europe/Sofia) · 5 min ago\n🔑 Rule <code>stroller</code> (group rule)\n\nGiving away a <b>stroller</b> rain cover and two baby bottles, pickup Lyulin 7 tonight",
+    "buttons": [
+      [
+        "🚫 Ignore author",
+        "🗑 Remove this rule"
+      ]
+    ],
+    "time": "19:19"
+  },
+  "groups": {
+    "html": "Groups you are monitoring (5). Tapping toggles: ✅ on, ☐ off.",
+    "buttons": [
+      [
+        "✅ Flats for rent Sofia, no agencies"
+      ],
+      [
+        "✅ Free stuff Sofia"
+      ],
+      [
+        "✅ Rides Plovdiv ⇄ Sofia"
+      ],
+      [
+        "✅ Second-hand · Sofia"
+      ],
+      [
+        "✅ Sofia Moms"
+      ],
+      [
+        "☐ Bikes & scooters BG"
+      ],
+      [
+        "🔄 Refresh groups"
+      ],
+      [
+        "🔍 Search",
+        "⬅️ Back"
+      ]
+    ]
+  },
+  "test": {
+    "command": "/test Selling a stroller and a baby crib, barely used, Mladost",
+    "html": "— Flats for rent Sofia, no agencies — no match\n✅ Free stuff Sofia — stroller (stroller)\n— Rides Plovdiv ⇄ Sofia — no match\n✅ Second-hand · Sofia — stroller (stroller)\n— Sofia Moms — no match"
+  },
+  "status": {
+    "command": "/status",
+    "html": "📊 Status\n\nCollector mac-1: ✅ reading\nLast report 1 min ago · pace: normal\nDetails: reading the Groups feed\nBudget left: page loads 13 of 20 per 60 min; scrolls 336 of 500 per 24 h\nDelay: up to 10 min for new posts\n\nGroups: 5 read · 6 known · 0 unreadable\n\nSince start: 1284 new posts · 211 repeats · 57 unwatched · 0 rejected\nNotifications: 38 sent · 4 in digests · 0 failed · 0 queued\nBot up 6d 3h\n/pause · /resume · /pace · /lease · /listings · /ai\n\nAcross your rules, all time: 42 — this one survives a restart"
+  },
+  "ai": {
+    "command": "/ai",
+    "html": "🤖 AI rule · model deepseek/deepseek-v4.1-flash · shadow: verdicts are recorded, nothing is sent yet\n\n#1 Rides Plovdiv ⇄ Sofia: «people who need a ride from Plovdiv to Sofia, not drivers offering seats» — sends from 70%\n   24 h: 4 judged, 2 would be sent, 0 failed, 0 waiting · $0.001\n#2 Flats for rent Sofia, no agencies: «a two-room flat to rent in Lozenets or Ivan Vazov, up to 700 euro, straight from the owner» — sends from 70%\n   24 h: 3 judged, 1 would be sent, 0 failed, 0 waiting · $0.001\n\nModel calls in 24 h: 7 of 1000\n\nWould have been sent (7 days):\n• 100% #1 Passenger seeks ride from Plovdiv to Sofia, exactly matching wish.\n  https://www.facebook.com/groups/207845119336801/posts/3118204779501/\n• 100% #2 Two-room flat in Lozenets, 650 euro, directly from owner, no commission.\n  https://www.facebook.com/groups/1510377402268945/posts/2204617330918/\n• 100% #1 Post is a passenger seeking ride from Plovdiv to Sofia, paying fuel.\n  https://www.facebook.com/groups/207845119336801/posts/3117950337160/\n\n/ai add &lt;group id&gt; &lt;wish in your words&gt; · /ai del &lt;n&gt; · group ids: /listings"
+  },
+  "alerts": [
+    {
+      "who": "bot",
+      "time": "08:12",
+      "html": "⛔ Facebook warning: collector mac-1 stopped (block #1: graphql:rate_limit_text). It stays stopped until 2026-10-17 14:12:00 +03:00 (Europe/Sofia); after that /resume asks for one careful check."
+    },
+    {
+      "who": "me",
+      "time": "14:25",
+      "html": "/resume"
+    },
+    {
+      "who": "bot",
+      "time": "14:25",
+      "html": "▶️ Sent. The collector takes one careful look within a few minutes, and you hear back either way."
+    },
+    {
+      "who": "bot",
+      "time": "14:31",
+      "html": "✅ Block #1 lifted after a clean check. The collector reads cautiously for a while."
+    },
+    {
+      "who": "bot",
+      "time": "14:31",
+      "html": "✅ Collector mac-1 is reading again."
+    },
+    {
+      "who": "bot",
+      "time": "19:40",
+      "html": "🔕 No new posts from Sofia Moms for 3 h, nights not counted (it usually posts at least every 1 h). The collector says it is reading — check the group by hand."
+    }
+  ],
+  "wish": "people who need a ride from Plovdiv to Sofia, not drivers offering seats",
+  "ids": {
+    "rides": "207845119336801"
+  },
+  "verdicts": [
+    {
+      "text": "Търся място за утре сутрин от Пловдив за София, 1 човек, малък багаж",
+      "percent": 100,
+      "reason": "Passenger seeks ride from Plovdiv to Sofia, exactly matching wish."
+    },
+    {
+      "text": "Пътувам Пловдив - София днес 18:00, 3 свободни места, 15лв",
+      "percent": 0,
+      "reason": "Driver offers seats from Plovdiv to Sofia, not someone needing a ride."
+    },
+    {
+      "text": "Има ли някой за София от Пловдив сега? Плащам гориво",
+      "percent": 100,
+      "reason": "Post is a passenger seeking ride from Plovdiv to Sofia, paying fuel."
+    },
+    {
+      "text": "Търся място София - Пловдив в петък вечерта",
+      "percent": 0,
+      "reason": "Post seeks Sofia to Plovdiv, opposite direction from desired Plovdiv to Sofia."
+    }
+  ],
+  "names": {
+    "480112093517204": "Second-hand · Sofia",
+    "1293550871064118": "Sofia Moms",
+    "361048227915530": "Free stuff Sofia",
+    "207845119336801": "Rides Plovdiv ⇄ Sofia",
+    "1510377402268945": "Flats for rent Sofia, no agencies",
+    "905662184027713": "Bikes & scooters BG"
+  }
+}

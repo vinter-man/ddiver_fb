@@ -1,0 +1,38 @@
+{
+ "_fixture": {
+  "builder": "tools/make_fixture.py (allow-list)",
+  "synthetic": true,
+  "source": "synthetic"
+ },
+ "steps": [
+  {
+   "final_url": "https://www.facebook.com/?filter=groups&sk=h_chr",
+   "status": 200,
+   "document": null,
+   "graphql": [
+    {
+     "friendly_name": "CometNewsFeedPaginationQuery",
+     "status": 200,
+     "body": "for (;;);{\"errors\":[{\"message\":\"Rate limit exceeded\",\"severity\":\"CRITICAL\",\"code\":1675004,\"summary\":\"Rate limit exceeded\",\"description\":\"You have been temporarily blocked from performing this action.\"}],\"data\":null}"
+    },
+    {
+     "friendly_name": "CometNotificationsDropdownQuery",
+     "status": 200,
+     "body": "for (;;);{\"error\":1357001,\"errorSummary\":\"Not logged in\",\"errorDescription\":\"Please log in to continue.\"}"
+    },
+    {
+     "friendly_name": "CometNewsFeedPaginationQuery",
+     "status": 200,
+     "body": "for (;;);{\"data\":{\"viewer\":null}}"
+    },
+    {
+     "friendly_name": "CometNewsFeedPaginationQuery",
+     "status": 200,
+     "body": "for (;;);{\"data\":{\"viewer\":{\"news_feed\":{\"edges\":[]}}},\"errors\":[{\"message\":\"A server error field_exception occured.\",\"severity\":\"ERROR\",\"path\":[\"viewer\",\"news_feed\",\"edges\",0,\"node\",\"feature_intervention\"]}]}"
+    }
+   ],
+   "dom": {},
+   "pagination_fired": true
+  }
+ ]
+}

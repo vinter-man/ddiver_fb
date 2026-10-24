@@ -1,0 +1,33 @@
+# The collector's only way to the brain: an ssh local forward from the Unix socket
+# ~/.ssh/fbtunnel.sock (owner-only, in a 0700 directory) to the VPS's 127.0.0.1:8781 (DESIGN
+# D6); the collector then needs FBC_INGEST_URL=http://127.0.0.1:8781 and
+# FBC_INGEST_SOCKET=<home>/.ssh/fbtunnel.sock. Runs under `loginctl enable-linger` so it
+# survives logout.
+#
+# Install: copy to ~/.config/systemd/user/, put deploy/ssh/fbtunnel_client.config at
+# ~/.ssh/fbtunnel_client.config (0600), then
+#   systemctl --user daemon-reload && systemctl --user enable --now autossh.service
+#
+# systemd restarts it at most once every 200 s: 3 attempts in 10 minutes, under fail2ban's
+# default sshd jail (maxretry 5 within findtime 10 min; deploy/vps/setup-fbtunnel.sh prints the
+# VPS's own values), so a broken key or host key cannot get the home IP banned through these
+# restarts. autossh also restarts a failed ssh by itself, at its own pace: check that pace
+# against the jail (the VPS's auth log) before the laptop runs unattended (RUNBOOK section 8).
+
+[Unit]
+Description=ddiver-fb tunnel to the brain (ssh -L, one forward)
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Environment=AUTOSSH_GATETIME=0
+ExecStart=/usr/bin/autossh -M 0 -N -F %h/.ssh/fbtunnel_client.config fbtunnel
+Restart=always
+RestartSec=200
+UMask=0077
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=default.target

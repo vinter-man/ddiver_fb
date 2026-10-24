@@ -1,0 +1,28 @@
+# fbcollector as a systemd --user service on the Linux laptop (DESIGN, Operations).
+#
+# Install: copy to ~/.config/systemd/user/, then
+#   systemctl --user daemon-reload && systemctl --user enable --now fbcollector.service
+# The graphical session must export DISPLAY/XAUTHORITY (or WAYLAND_DISPLAY) to systemd:
+#   systemctl --user import-environment DISPLAY XAUTHORITY WAYLAND_DISPLAY
+# Chrome runs headed in that one real session, the same one used for `fbcollector login`.
+
+[Unit]
+Description=ddiver-fb home collector (Facebook groups, read passively)
+PartOf=graphical-session.target
+After=graphical-session.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+ExecStart=%h/ddiver_facebook/.venv/bin/fbcollector run
+WorkingDirectory=%h/ddiver_facebook
+Restart=on-failure
+RestartSec=30
+KillSignal=SIGTERM
+TimeoutStopSec=90
+UMask=0077
+Environment=PYTHONUNBUFFERED=1
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=graphical-session.target

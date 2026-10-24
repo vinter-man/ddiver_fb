@@ -1,0 +1,30 @@
+[project]
+name = "ddiver-fb"
+version = "0.1.0"
+description = "The ddiver-fb brain: ddiver's bot, rules and delivery with a Facebook source."
+requires-python = ">=3.12"
+license = "MIT"
+authors = [{ name = "vinter-man" }]
+dependencies = [
+  "ddiver-core",
+  "fbwire",
+  "telethon>=1.45,<2",
+  "aiosqlite>=0.21",
+  "httpx>=0.27",
+  "pydantic>=2.9",
+  "pydantic-settings>=2.6",
+  "tzdata>=2025.1",
+]
+
+[project.scripts]
+ddiver-fb = "ddiver_fb.__main__:main"
+
+[tool.uv.sources]
+fbwire = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ddiver_fb"]

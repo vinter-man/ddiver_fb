@@ -1,0 +1,54 @@
+{
+ "_fixture": {
+  "builder": "tools/make_fixture.py (allow-list)",
+  "synthetic": true,
+  "source": "assumed shape, synthetic"
+ },
+ "steps": [
+  {
+   "final_url": "https://www.facebook.com/groups/joins/",
+   "status": 200,
+   "document": "groups_joins_synthetic.html",
+   "graphql": [],
+   "dom": {
+    "html_lang": "en",
+    "joined_header_count": 5
+   },
+   "pagination_fired": false
+  },
+  {
+   "final_url": "https://www.facebook.com/groups/joins/",
+   "status": 200,
+   "document": null,
+   "graphql": [
+    {
+     "friendly_name": "GroupsCometJoinedGroupsPaginationQuery",
+     "status": 200,
+     "body": "for (;;);{\"data\":{\"node\":{\"joined_groups\":{\"edges\":[{\"node\":{\"__typename\":\"Group\",\"id\":\"400000000000004\",\"name\":\"Synthetic Roommates Burgas\",\"url\":\"https://www.facebook.com/groups/400000000000004/\"},\"cursor\":\"cursor-joins-4\"},{\"node\":{\"__typename\":\"Group\",\"id\":\"400000000000005\",\"name\":\"Synthetic Studios Ruse\",\"url\":\"https://www.facebook.com/groups/400000000000005/\"},\"cursor\":\"cursor-joins-5\"},{\"node\":{\"__typename\":\"Group\",\"id\":\"400000000000001\",\"name\":\"Synthetic Flats Sofia\",\"url\":\"https://www.facebook.com/groups/400000000000001/\"},\"cursor\":\"cursor-joins-6\"}]}}}}\n{\"label\":\"GroupsCometJoinedGroups_viewer$defer$GroupsCometJoinedGroups_viewer_joined_groups$page_info\",\"path\":[\"node\",\"joined_groups\"],\"data\":{\"page_info\":{\"has_next_page\":true,\"end_cursor\":\"cursor-joins-6\"}}}"
+    }
+   ],
+   "dom": {
+    "html_lang": "en",
+    "joined_header_count": 5
+   },
+   "pagination_fired": true
+  },
+  {
+   "final_url": "https://www.facebook.com/groups/joins/",
+   "status": 200,
+   "document": null,
+   "graphql": [
+    {
+     "friendly_name": "GroupsCometJoinedGroupsPaginationQuery",
+     "status": 200,
+     "body": "for (;;);{\"label\":\"GroupsCometJoinedGroups_viewer$defer$GroupsCometJoinedGroups_viewer_joined_groups$page_info\",\"path\":[\"node\",\"joined_groups\"],\"data\":{\"page_info\":{\"has_next_page\":false,\"end_cursor\":null}}}"
+    }
+   ],
+   "dom": {
+    "html_lang": "en",
+    "joined_header_count": 5
+   },
+   "pagination_fired": true
+  }
+ ]
+}

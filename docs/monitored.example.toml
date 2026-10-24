@@ -1,0 +1,32 @@
+# An example list of groups for the collector (these ids are made up).
+#
+# Copy it to <root>/monitored.toml, where the collector reads it (FBC_MONITORED_PATH overrides
+# that place; <root> is ~/Library/Application Support/fbcollector on the Mac):
+#
+#   cp docs/monitored.example.toml "$HOME/Library/Application Support/fbcollector/monitored.toml"
+#   chmod 600 "$HOME/Library/Application Support/fbcollector/monitored.toml"
+#
+# deploy/macos/setup-fbc-user.sh does this when no monitored.toml exists yet.
+#
+# confirmed_member = true is the owner's word that the listener account is a member: the
+# joined-groups sync cannot say so until its JSON shape is known (phase 0), and without a word
+# or a complete sync no group is ever read. The collector still checks each group's own page:
+# a page that does not say MEMBER pauses the group, alerts, and withdraws the confirmation.
+# Undated confirmations count from the moment the collector first reads them;
+# `fbcollector groups confirm <id|url>` adds or re-dates one (confirmed_at).
+
+[[group]]
+id = "390000000000001"
+confirmed_member = true
+
+[[group]]
+id = "150000000000002"
+confirmed_member = true
+
+[[group]]
+id = "1030000000000003"
+confirmed_member = true
+
+[[group]]
+id = "200000000000004"
+confirmed_member = true

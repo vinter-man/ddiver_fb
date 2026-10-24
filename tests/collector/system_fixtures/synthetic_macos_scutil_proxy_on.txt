@@ -1,0 +1,11 @@
+<dictionary> {
+  ExceptionsList : <array> {
+    0 : *.local
+  }
+  HTTPEnable : 1
+  HTTPPort : 8080
+  HTTPProxy : 192.0.2.50
+  HTTPSEnable : 0
+  ProxyAutoConfigEnable : 1
+  ProxyAutoConfigURLString : http://192.0.2.50/proxy.pac
+}

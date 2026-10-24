@@ -1,0 +1,25 @@
+# The build context is the repository, and on the VPS that directory also holds the brain's .env
+# (bot token, ingest token) and its database. The Dockerfile COPYs neither, and BuildKit sends
+# only what it COPYs, but nothing that must stay on the box should be one careless COPY away
+# from an image layer.
+.env
+.env.*
+!.env.example
+data/
+*.sqlite
+*.sqlite-*
+*.session
+*.session-journal
+secrets
+
+.git/
+.venv/
+**/__pycache__/
+*.pyc
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.hypothesis/
+.coverage
+.playwright-mcp/
+.claude/

@@ -1,0 +1,45 @@
+# The brain on the VPS: /srv/ddiver-fb, next to ddiver and apart from it (its own project name,
+# its own .env, its own data directory). The Dockerfile's header says how to build the image: an
+# ssh-agent holding the ddiver repository's read-only deploy key, and nothing else.
+name: ddiver-fb
+
+services:
+  brain:
+    build:
+      context: .
+      args:
+        # Set by the deploy so the image can say which commit it is; `unknown` when built by hand.
+        GIT_SHA: ${GIT_SHA:-unknown}
+      # The ddiver-core tag is fetched through the caller's ssh-agent (the ddiver
+      # repository's read-only deploy key); neither the key nor the git checkout reaches a layer.
+      ssh:
+        - default
+    image: ddiver-fb:latest
+    container_name: ddiver-fb
+    env_file: .env
+    environment:
+      DATA_DIR: /data
+      INGEST_HOST: 0.0.0.0
+      INGEST_PORT: "8781"
+    # The collector's ssh tunnel ends on the VPS's loopback (DESIGN D6: nothing new listens
+    # publicly). Never publish this on another address, and never use host networking.
+    ports:
+      - "127.0.0.1:8781:8781"
+    volumes:
+      - ./data:/data
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 30s
+    mem_limit: 384m
+    cpus: 0.5
+    healthcheck:
+      test: ["CMD", "ddiver-fb", "health"]
+      interval: 60s
+      timeout: 10s
+      start_period: 60s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "5"
